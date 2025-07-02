@@ -69,16 +69,24 @@ WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import environ
+import os
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': ('MYSQL_DATABASE'),
-        'USER': ('MYSQL_USER'),
-        'PASSWORD': ('MYSQL_PASSWORD'),
-        'HOST': ('MYSQL_HOST'),
-        'PORT': ('MYSQL_PORT', default='3306'),
+        'NAME': env('MYSQL_DATABASE'),
+        'USER': env('MYSQL_USER'),
+        'PASSWORD': env('MYSQL_PASSWORD'),
+        'HOST': env('MYSQL_HOST'),
+        'PORT': env('MYSQL_PORT', default='3306'),
     }
 }
+
 
 
 
